@@ -18,19 +18,19 @@ const Main: React.FC = () => {
       <div>Chrome Canary</div>
       <div>
         <label>
-          <input type="checkbox" checked />
+          <input type="checkbox" />
           シークレットモード
         </label>
       </div>
       <div>
         <label>
-          <input type="checkbox" checked />
+          <input type="checkbox" />
           開発者ツール
         </label>
       </div>
       <div>
         <label>
-          <input type="checkbox" checked />
+          <input type="checkbox" />
           SSL証明書エラーを無視
         </label>
       </div>
