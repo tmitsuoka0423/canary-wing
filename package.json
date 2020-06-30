@@ -2,12 +2,15 @@
   "name": "dev-launcher",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/index.js",
   "scripts": {
-    "start": "tsc && webpack && electron ./dist/main.js",
+    "start": "tsc && webpack && NODE_ENV=DEV electron ./dist/index.js",
     "tsc": "tsc",
     "watch": "tsc -w",
-    "build:render": "webpack"
+    "build:render": "webpack",
+    "package:mac": "webpack && electron-builder --mac --x64",
+    "package:windows": "webpack && electron-builder --win --x64",
+    "package:linux": "webpack && electron-builder --linux --x64"
   },
   "repository": {
     "type": "git",
@@ -53,5 +56,40 @@
     "typescript": "^3.9.5",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.12"
+  },
+  "build": {
+    "productName": "dev-launcher",
+    "appId": "dev-launcher.tmitsuoka0423.com",
+    "directories": {
+      "output": "./product"
+    },
+    "files": [
+      "./dist/**/*",
+      "./index.html",
+      "./icon/**/*"
+    ],
+    "dmg": {
+      "contents": [
+        {
+          "x": 410,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 130,
+          "y": 150,
+          "type": "file"
+        }
+      ]
+    },
+    "mac": {
+      "target": [
+        "dmg"
+      ]
+    },
+    "win": {
+      "target": "msi"
+    }
   }
 }

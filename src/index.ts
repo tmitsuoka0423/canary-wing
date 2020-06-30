@@ -1,4 +1,5 @@
 import { app, BrowserWindow } from 'electron';
+import path from 'path';
 
 // セキュアな Electron の構成
 // 参考: https://qiita.com/pochman/items/64b34e9827866664d436
@@ -16,9 +17,12 @@ const createWindow = (): void => {
   // 読み込む index.html。
   // tsc でコンパイルするので、出力先の dist の相対パスで指定する。
   win.loadFile('./index.html');
+  win.loadFile(path.join(__dirname, './index.html'));
 
   // 開発者ツールを起動する
-  win.webContents.openDevTools();
+  if (process.env.NODE_ENV === 'DEV') {
+    win.webContents.openDevTools();
+  }
 };
 
 // Electronの起動準備が終わったら、ウィンドウを作成する。
