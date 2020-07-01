@@ -4,13 +4,17 @@ import { exec } from 'child_process';
 
 const Main: React.FC = () => {
   const onLaunchClick = () => {
-    exec(
-      '/Applications/Google\\ Chrome\\ Canary.app/Contents/MacOS/Google\\ Chrome\\ Canary --incognito --auto-open-devtools-for-tabs --ignore-certificate-errors',
-      (err, stdout) => {
-        if (err) throw err;
-        console.log(stdout);
-      },
-    );
+    exec('killall Google\\ Chrome\\ Canary', err => {
+      if (err) throw err;
+      console.debug('killed google chrome canary');
+      exec(
+        '/Applications/Google\\ Chrome\\ Canary.app/Contents/MacOS/Google\\ Chrome\\ Canary --incognito --auto-open-devtools-for-tabs --ignore-certificate-errors',
+        (err, stdout) => {
+          if (err) throw err;
+          console.debug(stdout);
+        },
+      );
+    });
   };
 
   return (
