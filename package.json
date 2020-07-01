@@ -7,10 +7,10 @@
     "start": "tsc && webpack && NODE_ENV=DEV electron ./dist/index.js",
     "tsc": "tsc",
     "watch": "tsc -w",
-    "build:render": "webpack",
-    "package:mac": "webpack && electron-builder --mac --x64",
-    "package:windows": "webpack && electron-builder --win --x64",
-    "package:linux": "webpack && electron-builder --linux --x64"
+    "build:render": "tsc && webpack",
+    "package:mac": "tsc && webpack && electron-builder --mac --x64",
+    "package:windows": "tsc && webpack && electron-builder --win --x64",
+    "package:linux": "tsc && webpack && electron-builder --linux --x64"
   },
   "repository": {
     "type": "git",
