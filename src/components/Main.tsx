@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Checkbox } from './atoms';
+import { Button, Checkbox, Title } from './atoms';
 import { exec } from 'child_process';
+import styles from './styles.scss';
 
 const Main: React.FC = () => {
   const [command, setCommand] = useState('/Applications/Google\\ Chrome\\ Canary.app/Contents/MacOS/Google\\ Chrome\\ Canary');
@@ -48,40 +49,47 @@ const Main: React.FC = () => {
 
   return (
     <div>
-      <div>$ {command}</div>
-      <Checkbox
-        checked={incognito}
-        onChange={event => {
-          setIncognito(event.target.checked);
-          updateCommand();
-        }}>
-        シークレットモード
-      </Checkbox>
-      <Checkbox
-        checked={autoOpenDevtoolsForTabs}
-        onChange={event => {
-          setAutoOpenDevtoolsForTabs(event.target.checked);
-          updateCommand();
-        }}>
-        開発者ツール
-      </Checkbox>
-      <Checkbox
-        checked={ignoreCertificateErrors}
-        onChange={event => {
-          setIgnoreCertificateErrors(event.target.checked);
-          updateCommand();
-        }}>
-        SSL証明書エラーを無視
-      </Checkbox>
-      <Checkbox
-        checked={disableWebSecurity}
-        onChange={event => {
-          setDisableWebSecurity(event.target.checked);
-          updateCommand();
-        }}>
-        CORSエラーを無視
-      </Checkbox>
-      <Button onClick={onLaunchClick}>起動</Button>
+      <div className={styles.margin}>
+        <Title>Google Chrome Canary</Title>
+      </div>
+      <div className={`${styles.main} ${styles.margin}`}>
+        <Checkbox
+          checked={incognito}
+          onChange={event => {
+            setIncognito(event.target.checked);
+            updateCommand();
+          }}>
+          シークレットモード
+        </Checkbox>
+        <Checkbox
+          checked={autoOpenDevtoolsForTabs}
+          onChange={event => {
+            setAutoOpenDevtoolsForTabs(event.target.checked);
+            updateCommand();
+          }}>
+          開発者ツール
+        </Checkbox>
+        <Checkbox
+          checked={ignoreCertificateErrors}
+          onChange={event => {
+            setIgnoreCertificateErrors(event.target.checked);
+            updateCommand();
+          }}>
+          SSL証明書エラーを無視
+        </Checkbox>
+        <Checkbox
+          checked={disableWebSecurity}
+          onChange={event => {
+            setDisableWebSecurity(event.target.checked);
+            updateCommand();
+          }}>
+          CORSエラーを無視
+        </Checkbox>
+      </div>
+
+      <div className={styles.margin}>
+        <Button onClick={onLaunchClick}>起動</Button>
+      </div>
     </div>
   );
 };
