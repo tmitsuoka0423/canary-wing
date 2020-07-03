@@ -4,14 +4,14 @@ import React from 'react';
 interface IProps {
   children: string;
   checked: boolean;
-  onClick?: () => void;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const Checkbox: React.FC<IProps> = (props: IProps) => {
   return (
     <div>
       <label>
-        <input type="checkbox" checked={props.checked} onClick={props.onClick} />
+        <input type="checkbox" checked={props.checked} onChange={props.onChange} />
         {props.children}
       </label>
     </div>
