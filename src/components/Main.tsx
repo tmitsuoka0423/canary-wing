@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from './atoms/Button/Button';
 import { exec } from 'child_process';
 
 const Main: React.FC = () => {
+  const [incognito, setIncognito] = useState(false);
+  const [autoOpenDevtoolsForTabs, setAutoOpenDevtoolsForTabs] = useState(false);
+  const [ignoreCertificateErrors, setIgnoreCertificateErrors] = useState(false);
+  const [disableWebSecurity, setDisableWebSecurity] = useState(false);
+
   const onLaunchClick = () => {
     exec('killall Google\\ Chrome\\ Canary', err => {
       if (err) {
@@ -25,25 +30,25 @@ const Main: React.FC = () => {
       <div>Chrome Canary</div>
       <div>
         <label>
-          <input type="checkbox" />
+          <input type="checkbox" checked={incognito} onClick={() => setIncognito(!incognito)} />
           シークレットモード
         </label>
       </div>
       <div>
         <label>
-          <input type="checkbox" />
+          <input type="checkbox" checked={autoOpenDevtoolsForTabs} onClick={() => setAutoOpenDevtoolsForTabs(!autoOpenDevtoolsForTabs)} />
           開発者ツール
         </label>
       </div>
       <div>
         <label>
-          <input type="checkbox" />
+          <input type="checkbox" checked={ignoreCertificateErrors} onClick={() => setIgnoreCertificateErrors(!ignoreCertificateErrors)} />
           SSL証明書エラーを無視
         </label>
       </div>
       <div>
         <label>
-          <input type="checkbox" />
+          <input type="checkbox" checked={disableWebSecurity} onClick={() => setDisableWebSecurity(!disableWebSecurity)} />
           CORSエラーを無視
         </label>
       </div>
