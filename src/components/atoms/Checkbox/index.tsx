@@ -1,5 +1,5 @@
 import React from 'react';
-// import styles from './styles.scss';
+import styles from './styles.scss';
 
 interface IProps {
   children: string;
@@ -9,7 +9,7 @@ interface IProps {
 
 const Checkbox: React.FC<IProps> = (props: IProps) => {
   return (
-    <div>
+    <div className={styles.checkbox}>
       <label>
         <input type="checkbox" checked={props.checked} onChange={props.onChange} />
         {props.children}
