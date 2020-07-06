@@ -1,5 +1,5 @@
 {
-  "name": "dev-launcher",
+  "name": "rocket",
   "version": "1.0.3",
   "description": "",
   "main": "./dist/index.js",
@@ -57,8 +57,8 @@
     "webpack-cli": "^3.3.12"
   },
   "build": {
-    "productName": "dev-launcher",
-    "appId": "dev-launcher.tmitsuoka0423.com",
+    "productName": "rocket",
+    "appId": "rocket.tmitsuoka0423.com",
     "directories": {
       "output": "./product"
     },
@@ -83,6 +83,7 @@
       ]
     },
     "mac": {
+      "icon": "./icon/rocket.icns",
       "target": [
         "dmg"
       ]
