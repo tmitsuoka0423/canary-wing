@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, Menu, Tray, nativeImage } from 'electron';
 import path from 'path';
 
 // セキュアな Electron の構成
@@ -23,6 +23,33 @@ const createWindow = (): void => {
   if (process.env.NODE_ENV === 'DEV') {
     win.webContents.openDevTools();
   }
+
+  const trayIcon = new Tray(nativeImage.createFromPath(__dirname + '/icon/icon_tray.png'));
+
+  // タスクトレイに右クリックメニューを追加
+  const contextMenu = Menu.buildFromTemplate([
+    {
+      label: '表示',
+      click: function () {
+        win.focus();
+      },
+    },
+    {
+      label: '終了',
+      click: function () {
+        win.close();
+      },
+    },
+  ]);
+  trayIcon.setContextMenu(contextMenu);
+
+  // タスクトレイのツールチップをアプリ名に
+  trayIcon.setToolTip(app.getName());
+
+  // タスクトレイが左クリックされた場合、アプリのウィンドウをアクティブに
+  trayIcon.on('click', function () {
+    win.focus();
+  });
 };
 
 // Electronの起動準備が終わったら、ウィンドウを作成する。
