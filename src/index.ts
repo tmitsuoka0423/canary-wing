@@ -4,9 +4,11 @@ import path from 'path';
 // セキュアな Electron の構成
 // 参考: https://qiita.com/pochman/items/64b34e9827866664d436
 
+let trayIcon = null;
+let win: any = null;
 const createWindow = (): void => {
   // レンダープロセスとなる、ウィンドウオブジェクトを作成する。
-  const win = new BrowserWindow({
+  win = new BrowserWindow({
     width: 480,
     height: 600,
     webPreferences: {
@@ -24,7 +26,7 @@ const createWindow = (): void => {
     win.webContents.openDevTools();
   }
 
-  const trayIcon = new Tray(nativeImage.createFromPath(__dirname + '/icon/icon_tray.png'));
+  trayIcon = new Tray(nativeImage.createFromPath(__dirname + '/icon/icon_tray.png'));
 
   // タスクトレイに右クリックメニューを追加
   const contextMenu = Menu.buildFromTemplate([
