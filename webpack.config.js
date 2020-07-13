@@ -63,16 +63,12 @@ module.exports = {
     ],
   },
   plugins: [
-    // Webpack plugin を利用する
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: './index.html',
     }),
     new CopyPlugin({
-      patterns: [
-        { from: './icon/icon_tray.png', to: 'icon' },
-        { from: './icon/rocket.icns', to: 'icon' },
-      ],
+      patterns: [{ from: './icon/icon_tray.png', to: 'icon' }],
     }),
   ],
 };

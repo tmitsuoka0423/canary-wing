@@ -1,55 +1,49 @@
-import { app, BrowserWindow, Menu, Tray, nativeImage } from 'electron';
+import { app, BrowserWindow, Tray, nativeImage } from 'electron';
 import path from 'path';
 
 // セキュアな Electron の構成
 // 参考: https://qiita.com/pochman/items/64b34e9827866664d436
 
-let trayIcon = null;
+let trayIcon: any = null;
 let win: any = null;
+let forceQuit: boolean = false;
+
 const createWindow = (): void => {
   // レンダープロセスとなる、ウィンドウオブジェクトを作成する。
-  win = new BrowserWindow({
-    width: 480,
-    height: 600,
-    webPreferences: {
-      nodeIntegration: true,
-    },
-  });
+  win = win
+    ? win
+    : new BrowserWindow({
+        width: 480,
+        height: 600,
+        webPreferences: {
+          nodeIntegration: true,
+        },
+      });
 
   // 読み込む index.html。
   // tsc でコンパイルするので、出力先の dist の相対パスで指定する。
   win.loadFile('./index.html');
   win.loadFile(path.join(__dirname, './index.html'));
 
+  win.on('close', (event: any) => {
+    if (!forceQuit) {
+      event.preventDefault();
+      win.hide();
+    }
+  });
+
   // 開発者ツールを起動する
   if (process.env.NODE_ENV === 'DEV') {
     win.webContents.openDevTools();
   }
 
-  trayIcon = new Tray(nativeImage.createFromPath(__dirname + '/icon/icon_tray.png'));
+  trayIcon = trayIcon ? trayIcon : new Tray(nativeImage.createFromPath(__dirname + '/icon/icon_tray.png'));
 
-  // タスクトレイに右クリックメニューを追加
-  const contextMenu = Menu.buildFromTemplate([
-    {
-      label: '表示',
-      click: function () {
-        win.focus();
-      },
-    },
-    {
-      label: '終了',
-      click: function () {
-        win.close();
-      },
-    },
-  ]);
-  trayIcon.setContextMenu(contextMenu);
-
-  // タスクトレイのツールチップをアプリ名に
   trayIcon.setToolTip(app.getName());
 
   // タスクトレイが左クリックされた場合、アプリのウィンドウをアクティブに
   trayIcon.on('click', function () {
+    win.show();
     win.focus();
   });
 };
@@ -74,3 +68,10 @@ app.on('activate', () => {
     createWindow();
   }
 });
+
+app.on('before-quit', () => {
+  console.log('before-quit');
+  forceQuit = true;
+});
+
+app.dock.hide();
