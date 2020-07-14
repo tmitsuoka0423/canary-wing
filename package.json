@@ -1,5 +1,5 @@
 {
-  "name": "wing",
+  "name": "canary-wing",
   "version": "1.0.5",
   "description": "",
   "main": "./dist/index.js",
@@ -58,15 +58,15 @@
     "webpack-cli": "^3.3.12"
   },
   "build": {
-    "productName": "wing",
-    "appId": "wing.tmitsuoka0423.com",
+    "productName": "Canary Wing",
+    "appId": "canary-wing.tmitsuoka0423.com",
     "directories": {
       "output": "./product"
     },
     "files": [
       "./dist/**/*",
       "./index.html",
-      "./icon/wing.icns"
+      "./icon/icon.icns"
     ],
     "dmg": {
       "contents": [
@@ -84,7 +84,7 @@
       ]
     },
     "mac": {
-      "icon": "./icon/wing.icns",
+      "icon": "./icon/icon.icns",
       "target": [
         "dmg"
       ]
