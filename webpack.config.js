@@ -79,7 +79,11 @@ module.exports = {
       template: './index.html',
     }),
     new CopyPlugin({
-      patterns: [{ from: './icon/icon_tray.png', to: 'icon' }],
+      patterns: [
+        { from: './icon/icon_tray.png', to: 'icon' },
+        { from: './src/images/chrome.png', to: 'images' },
+        { from: './src/images/chrome-canary.png', to: 'images' },
+      ],
     }),
   ],
 };
