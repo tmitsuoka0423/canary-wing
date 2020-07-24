@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Checkbox, Title } from './atoms';
+import { Button, Checkbox } from './atoms';
+import { Switch } from './molecules';
 import { exec } from 'child_process';
 import styles from './styles.scss';
 
@@ -50,7 +51,7 @@ const Main: React.FC = () => {
   return (
     <div>
       <div className={styles.margin}>
-        <Title>Google Chrome Canary</Title>
+        <Switch></Switch>
       </div>
       <div className={`${styles.main} ${styles.margin}`}>
         <Checkbox
