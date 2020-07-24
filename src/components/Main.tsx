@@ -54,6 +54,14 @@ const Main: React.FC = () => {
       </div>
       <div className={`${styles.main} ${styles.margin}`}>
         <Checkbox
+          checked={ignoreCertificateErrors}
+          onChange={event => {
+            setIgnoreCertificateErrors(event.target.checked);
+            updateCommand();
+          }}>
+          SSL証明書エラーを無視
+        </Checkbox>
+        <Checkbox
           checked={incognito}
           onChange={event => {
             setIncognito(event.target.checked);
@@ -67,15 +75,7 @@ const Main: React.FC = () => {
             setAutoOpenDevtoolsForTabs(event.target.checked);
             updateCommand();
           }}>
-          開発者ツール
-        </Checkbox>
-        <Checkbox
-          checked={ignoreCertificateErrors}
-          onChange={event => {
-            setIgnoreCertificateErrors(event.target.checked);
-            updateCommand();
-          }}>
-          SSL証明書エラーを無視
+          開発者ツールを表示
         </Checkbox>
         <Checkbox
           checked={disableWebSecurity}
