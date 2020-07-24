@@ -12,7 +12,7 @@ const Checkbox: React.FC<IProps> = (props: IProps) => {
     <div className={styles.checkbox}>
       <label>
         <input type="checkbox" checked={props.checked} onChange={props.onChange} />
-        {props.children}
+        <span className={styles.label}>{props.children}</span>
       </label>
     </div>
   );
