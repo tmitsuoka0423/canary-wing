@@ -24,6 +24,8 @@ const createWindow = (): void => {
   // tsc でコンパイルするので、出力先の dist の相対パスで指定する。
   win.loadFile('./index.html');
   win.loadFile(path.join(__dirname, './index.html'));
+  win.setMinimumSize(480, 600);
+  win.setMaximumSize(480, 600);
 
   win.on('close', (event: any) => {
     if (!forceQuit) {
