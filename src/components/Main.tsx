@@ -6,6 +6,7 @@ import styles from './styles.scss';
 
 const Main: React.FC = () => {
   const [command, setCommand] = useState('/Applications/Google\\ Chrome\\ Canary.app/Contents/MacOS/Google\\ Chrome\\ Canary');
+  const [isChrome, setIsChrome] = useState(false);
   const [incognito, setIncognito] = useState(true);
   const [autoOpenDevtoolsForTabs, setAutoOpenDevtoolsForTabs] = useState(false);
   const [ignoreCertificateErrors, setIgnoreCertificateErrors] = useState(true);
@@ -27,6 +28,10 @@ const Main: React.FC = () => {
         console.debug(stdout);
       });
     });
+  };
+
+  const toggleIsChrome = () => {
+    setIsChrome(!isChrome);
   };
 
   const updateCommand = () => {
@@ -51,7 +56,7 @@ const Main: React.FC = () => {
   return (
     <div>
       <div className={styles.margin}>
-        <Switch></Switch>
+        <Switch isChrome={isChrome} onClick={toggleIsChrome}></Switch>
       </div>
       <div className={`${styles.main} ${styles.margin}`}>
         <Checkbox

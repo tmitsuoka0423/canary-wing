@@ -1,12 +1,16 @@
 import React from 'react';
 import styles from './styles.scss';
-import { SwitchItem } from '../../molecules';
 
-const Switch: React.FC = () => {
+interface IProps {
+  isChrome: boolean;
+  onClick: () => void;
+}
+
+const Switch: React.FC<IProps> = (props: IProps) => {
   return (
-    <div className={styles.Switch}>
-      <SwitchItem label="Chrome" imgSrc={'./images/chrome.png'} selected></SwitchItem>
-      <SwitchItem label="Chrome Canary" imgSrc={'./images/chrome-canary.png'}></SwitchItem>
+    <div className={`${styles.Switch} ${styles.Switcher}`}>
+      <input type="checkbox" id="switch" onClick={props.onClick} checked={props.isChrome} />
+      <label htmlFor="switch"></label>
     </div>
   );
 };
