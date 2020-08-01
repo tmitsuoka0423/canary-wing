@@ -8,10 +8,10 @@ interface IProps {
 
 const Switch: React.FC<IProps> = (props: IProps) => {
   return (
-    <div className={`${styles.Switch} ${styles.Switcher}`}>
+    <label htmlFor="switch" className={styles.Switch}>
       <input type="checkbox" id="switch" onClick={props.onClick} checked={props.isChrome} />
-      <label htmlFor="switch"></label>
-    </div>
+      <span className={styles.Slider}></span>
+    </label>
   );
 };
 
