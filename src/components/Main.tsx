@@ -5,8 +5,8 @@ import { exec } from 'child_process';
 import styles from './styles.scss';
 
 const Main: React.FC = () => {
-  const [command, setCommand] = useState('/Applications/Google\\ Chrome\\ Canary.app/Contents/MacOS/Google\\ Chrome\\ Canary');
-  const [isChrome, setIsChrome] = useState(false);
+  const [command, setCommand] = useState('');
+  const [isChromeCanary, setIsChromeCanary] = useState(true);
   const [incognito, setIncognito] = useState(true);
   const [autoOpenDevtoolsForTabs, setAutoOpenDevtoolsForTabs] = useState(false);
   const [ignoreCertificateErrors, setIgnoreCertificateErrors] = useState(true);
@@ -17,11 +17,13 @@ const Main: React.FC = () => {
   });
 
   const onLaunchClick = () => {
-    exec('killall Google\\ Chrome\\ Canary', err => {
+    const target: string = isChromeCanary ? 'Google\\ Chrome\\ Canary' : 'Google\\ Chrome';
+
+    exec(`killall ${target}`, err => {
       if (err) {
-        console.debug('chrome canary is not launched');
+        console.debug('chrome is not launched');
       } else {
-        console.debug('killed google chrome canary');
+        console.debug('killed google chrome');
       }
       exec(command, (err, stdout) => {
         if (err) throw err;
@@ -31,12 +33,15 @@ const Main: React.FC = () => {
   };
 
   const toggleIsChrome = () => {
-    setIsChrome(!isChrome);
+    setIsChromeCanary(!isChromeCanary);
   };
 
   const updateCommand = () => {
-    const options = [];
+    const target: string = isChromeCanary
+      ? '/Applications/Google\\ Chrome\\ Canary.app/Contents/MacOS/Google\\ Chrome\\ Canary'
+      : '/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome';
 
+    const options = [];
     if (incognito) {
       options.push('--incognito');
     }
@@ -50,13 +55,13 @@ const Main: React.FC = () => {
       options.push('--disable-web-security');
     }
 
-    setCommand(`/Applications/Google\\ Chrome\\ Canary.app/Contents/MacOS/Google\\ Chrome\\ Canary ${options.join(' ')}`);
+    setCommand(`${target} ${options.join(' ')}`);
   };
 
   return (
     <div>
       <div className={styles.margin}>
-        <Switch isChrome={isChrome} onClick={toggleIsChrome}></Switch>
+        <Switch isChromeCanary={isChromeCanary} onClick={toggleIsChrome}></Switch>
       </div>
       <div className={`${styles.main} ${styles.margin}`}>
         <Checkbox
