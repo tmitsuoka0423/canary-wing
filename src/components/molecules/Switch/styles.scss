@@ -11,7 +11,7 @@
   }
 
   &::before {
-    content: "Chrome";
+    content: url("../../../../dist/images/chrome.png");
     position: absolute;
     top: 50%;
     left: 32px;
@@ -19,7 +19,7 @@
     transform: translateY(-50%);
   }
   &::after {
-    content: "Chrome Canary";
+    content: url("../../../../dist/images/chrome-canary.png");
     position: absolute;
     top: 50%;
     right: 32px;
