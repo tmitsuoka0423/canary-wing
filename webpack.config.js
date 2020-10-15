@@ -24,7 +24,10 @@ module.exports = {
   },
   plugins: [
     new CopyPlugin({
-      patterns: [{ from: './icon/icon_tray.png', to: 'icon' }],
+      patterns: [
+        { from: './icon/icon_tray.png', to: 'icon' },
+        { from: './package.json', to: '' },
+      ],
     }),
   ],
 };
