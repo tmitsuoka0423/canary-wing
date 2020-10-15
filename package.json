@@ -4,14 +4,14 @@
   "description": "",
   "main": "./dist/index.js",
   "scripts": {
-    "start": "npm run webpack && NODE_ENV=DEV electron ./dist/index.js",
+    "start": "yarn webpack && NODE_ENV=DEV electron ./dist/index.js",
     "tsc": "tsc",
     "watch": "tsc -w",
-    "package:mac": "npm run webpack && electron-builder --mac --x64",
-    "package:windows": "npm run webpack && electron-builder --win --x64",
-    "package:linux": "npm run webpack && electron-builder --linux --x64",
+    "package:mac": "yarn webpack && electron-builder --mac --x64",
+    "package:windows": "yarn webpack && electron-builder --win --x64",
+    "package:linux": "yarn webpack && electron-builder --linux --x64",
     "webpack": "webpack",
-    "prewebpack": "npm i"
+    "prewebpack": "yarn"
   },
   "repository": {
     "type": "git",
