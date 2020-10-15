@@ -8,7 +8,7 @@ app.on('ready', async () => {
   const version = await getVersion();
   const options = new Options();
 
-  appIcon = appIcon ?? new Tray(nativeImage.createFromPath(__dirname + '/icon/icon_tray.png'));
+  appIcon = appIcon ?? new Tray(nativeImage.createFromPath(`${__dirname}/icon/icon_tray.png`));
   const contextMenu = Menu.buildFromTemplate([
     { label: `Canary Wing ver.${version}`, enabled: false },
     { type: 'separator' },
